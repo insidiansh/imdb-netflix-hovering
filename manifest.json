@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "IMDb Ratings for Streaming",
+  "version": "1.0.0",
+  "description": "Hover over any movie or series on Netflix, Prime Video, or JioHotstar to see its IMDb rating.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.omdbapi.com/*",
+    "https://*.netflix.com/*",
+    "https://*.primevideo.com/*",
+    "https://*.amazon.com/*",
+    "https://*.amazon.in/*",
+    "https://*.amazon.co.uk/*",
+    "https://*.hotstar.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_icon": "icon.png" },
+  "icons": { "48": "icon.png", "128": "icon.png" },
+  "content_scripts": [
+    {
+      "matches": ["https://*.netflix.com/*"],
+      "js": ["content.js"],
+      "css": ["tooltip.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.primevideo.com/*",
+        "https://*.amazon.com/*",
+        "https://*.amazon.in/*",
+        "https://*.amazon.co.uk/*"
+      ],
+      "js": ["content.js"],
+      "css": ["tooltip.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.hotstar.com/*"],
+      "js": ["content.js"],
+      "css": ["tooltip.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
